@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainlayoutRegistr">
+    android:id="@+id/mainlayoutRegistr"
+    android:layout_margin="15dp"
+    android:nestedScrollingEnabled="true">
+
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/PictureLogin"
         android:layout_width="247dp"
         android:layout_height="283dp"
         android:src="@drawable/logomain"
@@ -16,121 +19,108 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.073" />
 
 
     <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/FioLayout"
     android:layout_width="359.6dp"
     android:layout_height="55.68dp"
-    android:layout_marginTop="370dp"
+    android:layout_marginTop="10dp"
     app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
-    app:layout_constraintTop_toTopOf="@+id/mainlayoutRegistr"
-        app:hintTextColor="@color/inputActiveBlue">
+    app:layout_constraintTop_toBottomOf="@+id/PictureLogin"
+        app:hintTextColor="@color/inputActiveBlue"
+        app:boxStrokeErrorColor="@color/inputError"
+        app:boxStrokeColor="@color/inputActiveBlue">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/FioReg"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:inputType="text"
         android:hint="ФИО"
 
-        app:layout_constraintBottom_toTopOf="@+id/ETLoginNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.87" />
+
+      />
 </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/NumberLayout"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
-        app:layout_constraintTop_toTopOf="@+id/FioLayout"
-        app:hintTextColor="@color/inputActiveBlue">
+        app:layout_constraintTop_toBottomOf="@+id/FioLayout"
+        app:hintTextColor="@color/inputActiveBlue"
+        app:boxStrokeColor="@color/inputActiveBlue">>
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ETLoginNumber"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:autofillHints="phone"
 
         android:hint="Номер телефона"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:inputType="phone"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/PassLayout"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
-        app:layout_constraintTop_toTopOf="@+id/NumberLayout"
-        app:hintTextColor="@color/inputActiveBlue">
+        app:layout_constraintTop_toBottomOf="@+id/NumberLayout"
+        app:hintTextColor="@color/inputActiveBlue"
+        app:boxStrokeColor="@color/inputActiveBlue">>
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ETLoginPass"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:hint="Пароль"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/PassReturnLayout"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="10dp"
+        app:hintTextColor="@color/inputActiveBlue"
         app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
-        app:layout_constraintTop_toTopOf="@+id/PassLayout"
-        app:hintTextColor="@color/inputActiveBlue">
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/ETLoginPassAgain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="Повторите пароль"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnReg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ETLoginPass"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintTop_toBottomOf="@+id/PassLayout"
+        app:boxStrokeColor="@color/inputActiveBlue">>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ETLoginPassAgain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Повторите пароль"
+            android:inputType="textPassword" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnReg"
+        style="@style/ButtonBlue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="10dp"
 
         android:text="Зарегестрироваться"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

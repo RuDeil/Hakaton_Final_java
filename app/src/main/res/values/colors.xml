@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Blue">#374CBC</color>
     <color name="inputActiveBlue">#818BE7</color>
+    <color name="inputError">#FE2F2F</color>
+
 </resources>

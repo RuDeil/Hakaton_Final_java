@@ -10,48 +10,50 @@
 
 
     <ImageView
+        android:id="@+id/PictureLogin"
         android:layout_width="247dp"
         android:layout_height="283dp"
         android:src="@drawable/logomain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
-
+        app:layout_constraintVertical_bias="0.073"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutNumber"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
 
-        android:layout_marginTop="485dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="@+id/mainlayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/mainlayout"
-        app:layout_constraintTop_toTopOf="@+id/mainlayout"
-        app:hintTextColor="@color/inputActiveBlue">
+        app:layout_constraintTop_toBottomOf="@+id/PictureLogin"
+        app:hintTextColor="@color/inputActiveBlue"
+        app:boxStrokeColor="@color/inputActiveBlue">
 
-      <com.google.android.material.textfield.TextInputEditText
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:hint="Номер телефона"
-          android:id="@+id/ETLoginNumber"
-
-          android:inputType="number"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ETLoginNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Номер телефона"
+            android:maxLength="12"
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPass"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/mainlayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/mainlayout"
-        app:layout_constraintTop_toTopOf="@+id/mainlayout"
-        app:hintTextColor="@color/inputActiveBlue">>
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumber"
+        app:hintTextColor="@color/inputActiveBlue"
+        app:boxStrokeColor="@color/inputActiveBlue">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ETLoginPass"
@@ -66,30 +68,32 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="7dp"
         android:text="Вход"
+        style="@style/ButtonBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPass" />
+        app:layout_constraintBottom_toTopOf="@+id/btnReg"
+         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnReg"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-
+        style="@style/ButtonBlue"
         android:text="Регистрация"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/mainlayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+
         app:layout_constraintVertical_bias="0.0" />
 
 

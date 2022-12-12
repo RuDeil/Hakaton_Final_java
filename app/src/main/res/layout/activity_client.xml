@@ -16,7 +16,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="7dp"
         android:gravity="top"
-        android:text="@string/some_id"
+        android:text="User"
         android:textAppearance="@style/some_id"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +51,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.198" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rectangle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle_1"
+        android:text="Выйти"
+        style="@style/ButtonBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

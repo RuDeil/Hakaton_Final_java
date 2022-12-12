@@ -1,8 +1,10 @@
 package com.example.hakatonfinaljava;
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
 import android.widget.Toolbar;
+
+import com.redmadrobot.inputmask.helper.Mask;
+import com.redmadrobot.inputmask.model.CaretString;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -35,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Disposable single;
     private Button btnRegister;
-    private boolean isBoss = true;
+    private Boolean isBoss = false;
+    private View vPhone, vPass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +58,20 @@ public class MainActivity extends AppCompatActivity {
         //Слушатели кнопок
         btnLogin.setOnClickListener(this::onClick);
         btnRegister.setOnClickListener(this::onClick);
+        //Layout
+        vPhone = findViewById(R.id.textInputLayoutNumber);
+        vPass = findViewById(R.id.textInputLayoutPass);
     }
 
     private void onClick(View v) {
-        //getData();
+
         {
             Intent intent;
             switch (v.getId()) {
 
                 case R.id.btnLogin:
-                    if(isBoss == true) {
+                    getData();
+                    if(isBoss) {
                         intent = new Intent(MainActivity.this, Boss.class);
                         startActivity(intent);
                     }
@@ -78,10 +89,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+    public static String formatPhone(String param) {
+        Mask mask = new Mask("+7 ([000]) [000] [00] [00]");
+        Mask.Result result = mask.apply(
+                new CaretString(
+                        param,
+                        param.length(),
+                        new CaretString.CaretGravity.BACKWARD(false)
+                )
+        );
+        return result.getFormattedText().getString();
+    }
 
     private void getData() {
-        String loginNumber = etLoginNumber.getText().toString();
+        String loginNumber = formatPhone(etLoginNumber.getText().toString());
+       /* if(loginNumber.length()<12){
+            //vPhone.setContentDescription("Номер должен быть больше 12 символов");
+
+
+        }
+        TODO обработчик ошибки ввода логина
+        */
         String loginPassword = etLoginPass.getText().toString();
         startLoading();
         single = (Disposable) getNetService().getData("science")
