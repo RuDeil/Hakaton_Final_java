@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/boss_mainLayout">
 
     <TextView
         android:id="@+id/sotru"
@@ -98,19 +99,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOnlyOffline" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rectangle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="473dp"
-        android:background="@drawable/rectangle_1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/ButtonBlue"
+        android:text="Выход"
+        app:layout_constraintBottom_toBottomOf="@+id/boss_mainLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOnlyOffline"
+
         app:layout_constraintVertical_bias="0.0" />
 
 
