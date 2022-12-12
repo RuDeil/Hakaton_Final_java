@@ -8,32 +8,30 @@
     android:layout_margin="15dp">
 
     <TextView
-        android:id="@+id/some_id"
+        android:id="@+id/TvUser"
         android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="7dp"
-        android:gravity="top"
-        android:text="User"
+
+
+        android:text="Абдулабаев Абдулабай Абдулабаеевичйййййййййй ййййййй"
         android:textAppearance="@style/some_id"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="187dp"
         android:layout_height="162dp"
         android:src="@drawable/logomain"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="360dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.394" />
+        app:layout_constraintTop_toBottomOf="@+id/TvUser"
+         />
 
     <TextView
         android:id="@+id/status_onli"
@@ -52,15 +50,26 @@
         app:layout_constraintVertical_bias="0.198" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/rectangle_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnExit"
+        android:layout_width="317.84dp"
+        android:layout_height="55.68dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Выйти"
         style="@style/ButtonBlue"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_onli" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="317.84dp"
+        android:layout_height="55.68dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_onli"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

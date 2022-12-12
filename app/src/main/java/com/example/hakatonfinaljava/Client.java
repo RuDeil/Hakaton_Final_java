@@ -31,7 +31,7 @@ public class Client extends AppCompatActivity {
             //TODO Показать popup, что нужно включить Геолокаци и дать разрешение + запросить разрешение
         }
         while (macAddrUser == macAddrWork){
-            //TODO отправлять запрос каждые 6 минут
+            //TODO отправлять запрос каждые 5 минут
         }
 
 
