@@ -1,5 +1,7 @@
 package com.example.hakatonfinaljava;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -27,25 +30,55 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private OkHttpClient client;
-    private TextView textView;
+
     private EditText etLoginNumber, etLoginPass;
     private Button btnLogin;
     private Disposable single;
+    private Button btnRegister;
+    private boolean isBoss = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Инпуты
         etLoginNumber = findViewById(R.id.ETLoginNumber);
         etLoginPass = findViewById(R.id.ETLoginPass);
+        //Кнопки
         btnLogin = findViewById(R.id.btnLogin);
-        textView = findViewById(R.id.result);
+        btnRegister = findViewById(R.id.btnReg);
 
-
-
-btnLogin.setOnClickListener(view -> getData());
+        //Слушатели кнопок
+        btnLogin.setOnClickListener(this::onClick);
+        btnRegister.setOnClickListener(this::onClick);
     }
+
+    private void onClick(View v) {
+        //getData();
+        {
+            Intent intent;
+            switch (v.getId()) {
+
+                case R.id.btnLogin:
+                    if(isBoss == true) {
+                        intent = new Intent(MainActivity.this, Boss.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        intent = new Intent(MainActivity.this, Client.class);
+                        startActivity(intent);
+                        }
+
+                    break;
+                case R.id.btnReg:
+                    intent = new Intent(MainActivity.this, Registration.class);
+                    startActivity(intent);
+                default:
+                    break;
+            }
+        }
+    }
+
 
     private void getData() {
         String loginNumber = etLoginNumber.getText().toString();
@@ -56,7 +89,10 @@ btnLogin.setOnClickListener(view -> getData());
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(this::finishLoading)
                 .subscribe(this::handleResults, this::handleError);
+
+
     }
+
 
     private void handleError(Throwable throwable) {
         Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();

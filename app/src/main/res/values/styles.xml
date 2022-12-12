@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="status_onli">
+        <item name="android:textSize">27.84sp</item>
+        <item name="android:textColor">#216F24</item>
+    </style>
+
+    <style name="some_id">
+        <item name="android:textSize">27.84sp</item>
+        <item name="android:textColor">#374CBC</item>
+    </style>
+
+       <style name="sotrudniki">
+        <item name="android:textSize">27.84sp</item>
+        <item name="android:textColor">#374CBC</item>
+    </style>
+    <style name="tvOnly">
+        <item name="android:textSize">23.2sp</item>
+        <item name="android:textColor">#1E1E1E</item>
+    </style>
+
+
+
+
+
+
+</resources>

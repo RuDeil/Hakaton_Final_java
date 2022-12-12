@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Hakaton Final java</string>
+    <string name="status_onli">
+Status:\n\nOnline
+</string>
+    <string name="some_id">
+\u00D0\u00A8\u00D0\u00B0\u00D0\u00BA\u00D0\u00B0\u00D0\u00BB \u00D0\u00A8\u00D0\u00B0\u00D0\u00BA\u00D0\u00B0\u00D0\u00BB\u00D1\u008C\u00D0\u00B5\u00D0\u00B2\u00D0\u00B8\u00D1\u0087\n      \u00D0\u00A8\u00D0\u00B0\u00D0\u00BA\u00D0\u00B0\u00D0\u00BB\u00D0\u00B8\u00D0\u00BD\u00D1\u0081\u00D0\u00BA\u00D0\u00B8\u00D0\u00B9
+</string>
+
+
 </resources>
