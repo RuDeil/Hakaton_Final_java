@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="15dp"
+    android:id="@+id/mainlayout"
     tools:context=".MainActivity">
 
 
@@ -17,50 +18,63 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.272" />
+        app:layout_constraintVertical_bias="0.147" />
 
-    <EditText
-        android:id="@+id/ETLoginNumber"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutNumber"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="444dp"
-        android:autofillHints="phone"
-        android:background="@drawable/rectangle_1"
-        android:hint="Номер телефона"
-        android:inputType="phone"
-        android:textColor="@color/Blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/ETLoginPass"
+        android:layout_marginTop="485dp"
+        app:layout_constraintEnd_toEndOf="@+id/mainlayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/mainlayout"
+        app:layout_constraintTop_toTopOf="@+id/mainlayout"
+        app:hintTextColor="@color/inputActiveBlue">
 
+      <com.google.android.material.textfield.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:hint="Номер телефона"
 
+          android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPass"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="508dp"
-        android:background="@drawable/rectangle_1"
-        android:hint="Пароль"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.727"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="550dp"
+        app:layout_constraintEnd_toEndOf="@+id/mainlayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/mainlayout"
+        app:layout_constraintTop_toTopOf="@+id/mainlayout"
+        app:hintTextColor="@color/inputActiveBlue">>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ETLoginPass"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_1"
+            android:hint="Пароль"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         android:text="Вход"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ETLoginPass" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPass" />
 
     <Button
         android:id="@+id/btnReg"
@@ -72,6 +86,7 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintVertical_bias="0.0" />

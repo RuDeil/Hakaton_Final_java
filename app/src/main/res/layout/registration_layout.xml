@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainlayoutRegistr">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -16,10 +18,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035" />
 
-    <EditText
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/FioLayout"
+    android:layout_width="359.6dp"
+    android:layout_height="55.68dp"
+    android:layout_marginTop="370dp"
+    app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
+    app:layout_constraintTop_toTopOf="@+id/mainlayoutRegistr"
+        app:hintTextColor="@color/inputActiveBlue">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/FioReg"
-        android:layout_width="359.6dp"
-        android:layout_height="55.68dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:inputType="text"
@@ -30,60 +43,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.87" />
+</com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/ETLoginNumber"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/NumberLayout"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
+        app:layout_constraintTop_toTopOf="@+id/FioLayout"
+        app:hintTextColor="@color/inputActiveBlue">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ETLoginNumber"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="128dp"
         android:autofillHints="phone"
 
         android:hint="Номер телефона"
         android:inputType="phone"
-
-        android:textColor="@color/Blue"
-        app:layout_constraintBottom_toTopOf="@+id/ETLoginPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/ETLoginPass"
-
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PassLayout"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
+        app:layout_constraintTop_toTopOf="@+id/NumberLayout"
+        app:hintTextColor="@color/inputActiveBlue">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ETLoginPass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="508dp"
         android:hint="Пароль"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-
-    <EditText
-        android:id="@+id/ETLoginPassAgain"
-
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PassReturnLayout"
         android:layout_width="359.6dp"
         android:layout_height="55.68dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/mainlayoutRegistr"
+        app:layout_constraintTop_toTopOf="@+id/PassLayout"
+        app:hintTextColor="@color/inputActiveBlue">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ETLoginPassAgain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-
-        android:hint="Пароль"
+        android:hint="Повторите пароль"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/btnReg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETLoginPass"
         app:layout_constraintVertical_bias="0.322" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnReg"
@@ -95,7 +130,7 @@
         android:text="Зарегестрироваться"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
