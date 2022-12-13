@@ -1,47 +1,55 @@
 package com.example.hakatonfinaljava;
-import androidx.annotation.ColorInt;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import android.os.Bundle;
-import android.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.internal.TextWatcherAdapter;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.redmadrobot.inputmask.helper.Mask;
 import com.redmadrobot.inputmask.model.CaretString;
 
+import java.lang.ref.WeakReference;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
-import retrofit2.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private OkHttpClient client;
 
-    private EditText etLoginNumber, etLoginPass;
+    private TextInputEditText etLoginNumber, etLoginPass;
     private Button btnLogin;
     private Disposable single;
     private Button btnRegister;
-    private Boolean isBoss = false;
-    private View vPhone, vPass;
+    private Boolean isBoss = true;
+
+
+
 
 
     @Override
@@ -59,8 +67,44 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(this::onClick);
         btnRegister.setOnClickListener(this::onClick);
         //Layout
-        vPhone = findViewById(R.id.textInputLayoutNumber);
-        vPass = findViewById(R.id.textInputLayoutPass);
+        TextInputLayout textInputLayoutPhone, textInputLayoutPass;
+        textInputLayoutPhone = findViewById(R.id.textInputLayoutNumber);
+        textInputLayoutPass = findViewById(R.id.textInputLayoutPass);
+
+        etLoginPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 8) {
+                    boolean valid = isValidPassword(s.toString());
+                    textInputLayoutPass.setErrorEnabled(valid);
+                    String error;
+                    if (valid){
+                        error = "";}
+                    else {
+                        error = getString(R.string.invalid_login_message);}
+
+                    textInputLayoutPass.setError(error);
+                    if (valid) {
+                        Toast toastPass = Toast.makeText(getApplicationContext(),
+                                R.string.invalid_login_message, Toast.LENGTH_SHORT);
+                        toastPass.show();
+                    }
+
+                }
+            }
+        });
+
+
     }
 
     private void onClick(View v) {
@@ -70,17 +114,24 @@ public class MainActivity extends AppCompatActivity {
             switch (v.getId()) {
 
                 case R.id.btnLogin:
-                    getData();
-                    if(isBoss) {
+                    if (isValidPassword(etLoginPass.getText().toString())){
+                        //getData(); TODO
+                        if(isBoss) {
                         intent = new Intent(MainActivity.this, Boss.class);
                         startActivity(intent);
-                    }
-                    else{
+                            }
+                        else{
                         intent = new Intent(MainActivity.this, Client.class);
                         startActivity(intent);
-                        }
-
+                            }
+                    }
+                    else{
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Проверьте данные", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                     break;
+
                 case R.id.btnReg:
                     intent = new Intent(MainActivity.this, Registration.class);
                     startActivity(intent);
@@ -89,8 +140,31 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    public static boolean isValidPassword(String password) {
+
+        String regex = ("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])");
+        Pattern p = Pattern.compile(regex);
+        if (password == null) {
+            return false;
+        }
+        Matcher m = p.matcher(password);
+        return m.matches();
+    }
+    private boolean isValidPhone(String Phone) {
+        final String PHONE_REGEX = "^\\+?(\\d{7})";
+        final Pattern pattern = Pattern.compile(PHONE_REGEX);
+        if (Phone == null){
+            return false;
+        }
+
+            Matcher matcher = pattern.matcher(Phone);
+            return matcher.matches();
+
+
+    }
+
     public static String formatPhone(String param) {
-        Mask mask = new Mask("+7 ([000]) [000] [00] [00]");
+        Mask mask = new Mask("7 [000] [000] [00] [00]");
         Mask.Result result = mask.apply(
                 new CaretString(
                         param,
@@ -101,15 +175,9 @@ public class MainActivity extends AppCompatActivity {
         return result.getFormattedText().getString();
     }
 
+
     private void getData() {
         String loginNumber = formatPhone(etLoginNumber.getText().toString());
-       /* if(loginNumber.length()<12){
-            //vPhone.setContentDescription("Номер должен быть больше 12 символов");
-
-
-        }
-        TODO обработчик ошибки ввода логина
-        */
         String loginPassword = etLoginPass.getText().toString();
         startLoading();
         single = (Disposable) getNetService().getData("science")
@@ -173,5 +241,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         return retrofit.create(NetApi.class);
     }
+
+
+
+
 
 }

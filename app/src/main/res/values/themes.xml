@@ -13,16 +13,25 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <!--Текст кнопок-->
+        <style name="ButtonBlue">
 
-    <style name="ButtonBlue">
-        <item name="android:background">#374CBC</item>
-        <item name="android:textColor">@color/white</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="android:textAllCaps">false</item>
+        </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+
+        <item name="colorControlActivated">#4461CF</item>
 
 
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
 
 
-
-
+        <item name="android:colorForeground">#C8CCDB
+        </item>
     </style>
+
 
 </resources>

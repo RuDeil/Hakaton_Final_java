@@ -33,17 +33,22 @@
         app:layout_constraintTop_toBottomOf="@+id/PictureLogin"
         app:hintTextColor="@color/inputActiveBlue"
         app:circularflow_radiusInDP="10dp"
-
-        app:boxStrokeColor="@color/inputActiveBlue">
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@color/inputActiveBlue"
+        app:boxBackgroundColor="#DFDFDF"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ETLoginNumber"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Номер телефона"
             android:maxLength="12"
             android:digits="+1234567890"
-            android:inputType="phone" />
+            android:inputType="phone"
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -56,14 +61,21 @@
         app:layout_constraintStart_toStartOf="@+id/mainlayout"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumber"
         app:hintTextColor="@color/inputActiveBlue"
-        app:boxStrokeColor="@color/inputActiveBlue">
+        app:boxStrokeColor="@color/inputActiveBlue"
+        app:errorEnabled="true"
+
+        app:circularflow_radiusInDP="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        app:boxBackgroundColor="#DFDFDF">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ETLoginPass"
 
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/rectangle_1"
@@ -75,32 +87,37 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
-        style="@style/ButtonBlue"
+        android:background="@drawable/buttonradius"
         android:layout_width="317dp"
         android:layout_height="55dp"
 
-        android:layout_marginTop="67dp"
-        android:text="Вход"
-        app:layout_constraintBottom_toTopOf="@+id/btnReg"
+
+        android:text="Войти"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPass" />
+        style="@style/ButtonBlue"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@id/btnReg"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnReg"
         android:layout_width="317dp"
         android:layout_height="55dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="10dp"
         style="@style/ButtonBlue"
         android:text="Регистрация"
 
+        android:background="@drawable/buttonradius"
         app:layout_constraintBottom_toBottomOf="@+id/mainlayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+
         android:layout_marginBottom="15dp"
-        app:layout_constraintVertical_bias="0.0" />
+       />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

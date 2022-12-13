@@ -16,6 +16,7 @@ Status:\n\nOnline
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="PassOgr">1234567890!@#$%^&amp;*()_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"№;%:?*()_+`~/\|}{[]'-=,.</string>
+       <string name="invalid_login_message">Проверьте номер или пароль</string>
 
 
 </resources>
