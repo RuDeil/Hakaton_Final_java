@@ -1,4 +1,4 @@
-package com.example.hakatonfinaljava;
+package com.example.hakatonfinaljava.boss;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,15 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class Registration extends AppCompatActivity {
+import com.example.hakatonfinaljava.R;
+
+public class BossActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration_layout);
-initToolbar();
-    }
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.boss_layout);
+        initToolbar();
+    }
     private void initToolbar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -22,7 +24,6 @@ initToolbar();
             actionBar.setDisplayShowHomeEnabled(true);
         }
         setTitle("");
-
     }
 
     @Override
@@ -33,4 +34,3 @@ initToolbar();
         return super.onOptionsItemSelected(item);
     }
 }
-

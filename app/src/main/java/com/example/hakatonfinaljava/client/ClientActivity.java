@@ -1,4 +1,4 @@
-package com.example.hakatonfinaljava;
+package com.example.hakatonfinaljava.client;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +9,9 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class Client extends AppCompatActivity {
+import com.example.hakatonfinaljava.R;
+
+public class ClientActivity extends AppCompatActivity {
     private String macAddrUser;
     private String macAddrWork = " ";
 
