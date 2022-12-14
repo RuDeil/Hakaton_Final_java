@@ -20,6 +20,9 @@ import com.example.hakatonfinaljava.utils.Utils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -132,5 +135,19 @@ public class RegistrationActivity extends AppCompatActivity {
         editText.setText(text);
         editText.addTextChangedListener(textWatcher);
     }
+    public static boolean isValidPassword(final String password) {
+
+        String regex = ("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!?()@#$%^&+=])(?=\\S+$).{8,}$");
+        Pattern p = Pattern.compile(regex);
+        if (password == null) {
+            return false;
+        }
+        else {
+            Matcher m = p.matcher(password);
+            return m.matches();
+        }
+    }
 }
+
+
 

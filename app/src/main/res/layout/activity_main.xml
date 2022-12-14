@@ -57,10 +57,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 app:boxBackgroundColor="#DFDFDF"
                 app:boxStrokeColor="@color/inputActiveBlue"
-                app:circularflow_radiusInDP="10dp"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/inputActiveBlue"
                 app:layout_constraintEnd_toEndOf="@+id/mainlayout"
@@ -72,14 +71,60 @@
                     android:id="@+id/ETLoginPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
                     android:background="@drawable/rectangle_1"
-                    android:digits="@string/PassOgr"
                     android:hint="Пароль"
                     android:inputType="textPassword"
                     android:maxLength="20" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutGuest"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                app:boxBackgroundColor="#DFDFDF"
+                app:boxStrokeColor="@color/inputActiveBlue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/inputActiveBlue"
+                app:layout_constraintEnd_toEndOf="@+id/mainlayout"
+                app:layout_constraintStart_toStartOf="@+id/mainlayout"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumber"
+                android:visibility="invisible"
+                >
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_1"
+                    android:hint="ФИО"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:visibility="invisible"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Switch
+                android:id="@+id/switchLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPass"
+                app:layout_constraintBottom_toTopOf="@id/btnLogin"
+                android:theme="@style/SCBSwitch"
+               app:layout_constraintStart_toStartOf="parent"
+                android:text="Я гость"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+
+               />
+
+
+
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
@@ -100,7 +145,7 @@
                 style="@style/ButtonBlue"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="14dp"
                 android:background="@drawable/buttonradius"
                 android:text="Регистрация"
                 app:layout_constraintBottom_toBottomOf="@+id/mainlayout"

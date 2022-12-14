@@ -1,13 +1,15 @@
 package com.example.hakatonfinaljava.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,24 +20,20 @@ import com.example.hakatonfinaljava.client.ClientActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import io.reactivex.disposables.Disposable;
 import okhttp3.OkHttpClient;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private OkHttpClient client;
 
-    private TextInputEditText etLoginNumber, etLoginPass;
+    private TextInputEditText etLoginNumber, etLoginPass, etGuest;
     private Button btnLogin;
     private Disposable single;
     private Button btnRegister;
-    private Boolean isBoss = true;
+    private Boolean isBoss = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         //Инпуты
         etLoginNumber = findViewById(R.id.ETLoginNumber);
         etLoginPass = findViewById(R.id.ETLoginPass);
+        etGuest = findViewById(R.id.etGuest);
         //Кнопки
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnReg);
@@ -52,11 +51,40 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(this::onClick);
         btnRegister.setOnClickListener(this::onClick);
         //Layout
-        TextInputLayout textInputLayoutPhone, textInputLayoutPass;
+        TextInputLayout textInputLayoutPhone, textInputLayoutPass, textInputLayoutGuest;
         textInputLayoutPhone = findViewById(R.id.textInputLayoutNumber);
         textInputLayoutPass = findViewById(R.id.textInputLayoutPass);
+        textInputLayoutGuest = findViewById(R.id.textInputLayoutGuest);
 
-        etLoginPass.addTextChangedListener(new TextWatcher() {
+        //свитч
+        Switch swGuest;
+        swGuest = findViewById(R.id.switchLogin);
+       swGuest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if (isChecked) {
+                   btnRegister.setVisibility(View.INVISIBLE);
+                   etLoginNumber.setVisibility(View.INVISIBLE);
+                   etLoginPass.setVisibility(View.INVISIBLE);
+                   textInputLayoutPass.setVisibility(View.INVISIBLE);
+                   textInputLayoutPhone.setVisibility(View.INVISIBLE);
+                   textInputLayoutGuest.setVisibility(View.VISIBLE);
+                   etGuest.setVisibility(View.VISIBLE);
+
+
+               } else {
+                   btnRegister.setVisibility(View.VISIBLE);
+                   etLoginNumber.setVisibility(View.VISIBLE);
+                   etLoginPass.setVisibility(View.VISIBLE);
+                   textInputLayoutPass.setVisibility(View.VISIBLE);
+                   textInputLayoutPhone.setVisibility(View.VISIBLE);
+                   textInputLayoutGuest.setVisibility(View.INVISIBLE);
+                   etGuest.setVisibility(View.INVISIBLE);
+               }
+           }
+       });
+
+        etLoginNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -69,28 +97,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 8) {
-                    boolean valid = isValidPassword(s.toString());
-                    textInputLayoutPass.setErrorEnabled(valid);
-                    String error;
-                    if (valid){
-                        error = "";}
-                    else {
-                        error = getString(R.string.invalid_login_message);}
+                String error;
 
-                    textInputLayoutPass.setError(error);
-                    if (valid) {
-                        Toast toastPass = Toast.makeText(getApplicationContext(),
-                                R.string.invalid_login_message, Toast.LENGTH_SHORT);
-                        toastPass.show();
-                    }
+               if (s.length() != 12) {
+                    textInputLayoutPhone.setErrorEnabled(true);
+                    error ="Некорректный номер телефона";
+                    textInputLayoutPhone.setError(error);
+
 
                 }
+               else {
+                   textInputLayoutPhone.setErrorEnabled(false);
+                   error = "";
+                   textInputLayoutPhone.setError(error);
+               }
             }
+
+
+
+
         });
 
 
     }
+
+
 
     private void onClick(View v) {
 
@@ -99,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             switch (v.getId()) {
 
                 case R.id.btnLogin:
-                    if (isValidPassword(etLoginPass.getText().toString())){
+                    {
                         //getData(); TODO
                         if(isBoss) {
                         intent = new Intent(MainActivity.this, BossActivity.class);
@@ -109,11 +140,6 @@ public class MainActivity extends AppCompatActivity {
                         intent = new Intent(MainActivity.this, ClientActivity.class);
                         startActivity(intent);
                             }
-                    }
-                    else{
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Проверьте данные", Toast.LENGTH_SHORT);
-                        toast.show();
                     }
                     break;
 
@@ -125,25 +151,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public static boolean isValidPassword(String password) {
 
-        String regex = ("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])");
-        Pattern p = Pattern.compile(regex);
-        if (password == null) {
-            return false;
-        }
-        Matcher m = p.matcher(password);
-        return true; // m.matches();
-    }
-    private boolean isValidPhone(String Phone) {
-        final String PHONE_REGEX = "^\\+?(\\d{7})";
-        final Pattern pattern = Pattern.compile(PHONE_REGEX);
-        if (Phone == null){
-            return false;
-        }
 
-            Matcher matcher = pattern.matcher(Phone);
-            return matcher.matches();
-    }
 
 }

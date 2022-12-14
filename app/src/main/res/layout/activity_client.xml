@@ -51,7 +51,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnExit"
-        android:layout_width="317.84dp"
+        android:layout_width="match_parent"
         android:layout_height="55.68dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -67,7 +67,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUpdate"
-        android:layout_width="317.84dp"
+        android:layout_width="match_parent"
         android:layout_height="55.68dp"
         android:text="Обновить статус"
         style="@style/ButtonBlue"
