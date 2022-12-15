@@ -97,6 +97,59 @@ public class RegistrationActivity extends AppCompatActivity {
         String pass = ETLoginPass.getText().toString();
         String passAgain = ETLoginPassAgain.getText().toString(); // todo
 
+        ETLoginPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!isValidPassword(s.toString())){
+                    PassLayout.setErrorEnabled(true);
+                    String error = "Недопустимые символыю Допускаются латинские буквыБ цифры и спецсимволы ";
+                    PassLayout.setError(error);
+
+
+                } else {
+                    PassLayout.setErrorEnabled(false);
+                    String error = "";
+                    PassLayout.setError(error);
+                }
+            }
+        });
+        ETLoginPassAgain.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (ETLoginPass.getText().toString() == s.toString()){
+                    PassReturnLayout.setErrorEnabled(true);
+                    String error = "Пароли должны совпадать" ;
+                    PassReturnLayout.setError(error);
+
+
+                } else {
+                    PassLayout.setErrorEnabled(false);
+                    String error = "";
+                    PassLayout.setError(error);
+                }
+            }
+        });
+
         NetModule netModule = new NetModule();
         RegistrationData registrationData = new RegistrationData(phoneNumber, fio, pass);
         startLoading();

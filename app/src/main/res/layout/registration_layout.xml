@@ -33,6 +33,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 app:boxBackgroundColor="#DFDFDF"
+                app:errorEnabled="true"
+
                 app:boxStrokeColor="@color/inputActiveBlue"
                 app:boxStrokeErrorColor="@color/inputError"
                 app:hintTextColor="@color/inputActiveBlue"
@@ -43,8 +45,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/FioReg"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="ФИО"
+                    android:maxLength="50"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,9 +55,10 @@
                 android:id="@+id/NumberLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:boxBackgroundColor="#DFDFDF"
+                app:errorEnabled="true"
                 app:boxStrokeColor="@color/inputActiveBlue"
                 app:hintTextColor="@color/inputActiveBlue"
                 app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
@@ -64,8 +68,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ETLoginNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:autofillHints="phone"
+
                     android:hint="Номер телефона"
                     android:inputType="phone" />
 
@@ -75,9 +80,10 @@
                 android:id="@+id/PassLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:boxBackgroundColor="#DFDFDF"
+                app:errorEnabled="true"
                 app:boxStrokeColor="@color/inputActiveBlue"
                 app:hintTextColor="@color/inputActiveBlue"
                 app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
@@ -87,7 +93,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ETLoginPass"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:digits="@string/PassOgr"
                     android:hint="Пароль"
                     android:inputType="textPassword"
@@ -98,9 +104,10 @@
                 android:id="@+id/PassReturnLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:boxBackgroundColor="#DFDFDF"
+                app:errorEnabled="true"
                 app:boxStrokeColor="@color/inputActiveBlue"
                 app:hintTextColor="@color/inputActiveBlue"
                 app:layout_constraintEnd_toEndOf="@+id/mainlayoutRegistr"
@@ -110,7 +117,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ETLoginPassAgain"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Повторите пароль"
                     android:inputType="textPassword" />
 

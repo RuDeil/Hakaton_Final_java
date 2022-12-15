@@ -20,7 +20,7 @@ public final class NetModule {
     }
 
     private Retrofit createRetrofit() {
-        String baseUrl = "http://hakaton-esjc.onrender.com";
+        String baseUrl = "https://smiling-rose-hippo.cyclic.app/auth/";
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()

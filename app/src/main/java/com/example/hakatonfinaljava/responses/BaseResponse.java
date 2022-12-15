@@ -1,6 +1,8 @@
 package com.example.hakatonfinaljava.responses;
 
-public class BaseResponse {
+import java.io.Serializable;
+
+public class BaseResponse  implements Serializable {
     private Integer result;
     private String description;
 

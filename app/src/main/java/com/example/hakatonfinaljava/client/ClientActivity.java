@@ -1,14 +1,9 @@
 package com.example.hakatonfinaljava.client;
 
-import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
 
-import static androidx.core.content.PermissionChecker.checkSelfPermission;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
@@ -18,12 +13,21 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.hakatonfinaljava.R;
 
+import java.util.ArrayList;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+
 public class ClientActivity extends AppCompatActivity {
     private String macAddrUser;
-    //private String macAddrWork[] = TODO Ответ мак адресов из зпроса;
+
+
+    ArrayList<String> MacArray;
+    TextView tvUserName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +35,20 @@ public class ClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client);
         initToolbar();
         checkPermission();
+        tvUserName = findViewById(R.id.TvUser);
+        macAddrUser = getMacAddrUser();
 
-        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(
-                Context.WIFI_SERVICE);
-        WifiInfo wifiInf = wifiManager.getConnectionInfo();
-       macAddrUser = wifiInf.getBSSID().toString();
+        int resultChekMac = 0;
+        resultChekMac = CheckMac(MacArray, getMacAddrUser());
+        if (resultChekMac!=0){
+            
+        }
 
 
     }
+
+
+
     public void checkPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -53,6 +63,24 @@ public class ClientActivity extends AppCompatActivity {
         }
     }
 
+
+
+    public int CheckMac(ArrayList<String> MacArray, String macAddrUser){
+        int alarm = 0;
+        for(int i =0;MacArray.size()>i;i++){
+            if (getMacAddrUser() == MacArray.get(i)){
+                alarm++;
+            }
+        }
+        return alarm;
+
+    }
+    public String getMacAddrUser() {
+        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(
+                Context.WIFI_SERVICE);
+        WifiInfo wifiInf = wifiManager.getConnectionInfo();
+        return wifiInf.getBSSID().toString();
+    }
 
 
 
