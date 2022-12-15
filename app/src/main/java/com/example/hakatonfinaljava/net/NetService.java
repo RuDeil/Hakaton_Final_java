@@ -13,6 +13,7 @@ import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface NetService {
@@ -23,11 +24,18 @@ public interface NetService {
     Single<Response<LoginResponse>> login(@Body LoginData body);
 
     @POST("online")
-    Single<Response<BaseResponse>> online(@Body OnlineData body);
+    Single<Response<BaseResponse>> online(
+            @Header("Authorization") String token,
+            @Body OnlineData body
+    );
 
     @GET("workerList")
-    Single<Response<BossResponse>> workerList();
+    Single<Response<BossResponse>> workerList(
+            @Header("Authorization") String token
+    );
 
     @GET("logout")
-    Single<Response<LogoutRespounse>> logout();
+    Single<Response<LogoutRespounse>> logout(
+            @Header("Authorization") String token
+    );
 }

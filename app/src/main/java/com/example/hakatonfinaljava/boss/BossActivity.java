@@ -11,6 +11,7 @@ import com.example.hakatonfinaljava.R;
 import com.example.hakatonfinaljava.net.NetModule;
 import com.example.hakatonfinaljava.responses.Boss;
 import com.example.hakatonfinaljava.responses.BossResponse;
+import com.example.hakatonfinaljava.responses.LoginResponse;
 import com.example.hakatonfinaljava.utils.Utils;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 
 public class BossActivity extends AppCompatActivity {
 
+    private LoginResponse loginResponse = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,8 +30,12 @@ public class BossActivity extends AppCompatActivity {
         setContentView(R.layout.boss_layout);
         initToolbar();
 
+        loginResponse = (LoginResponse) getIntent().getSerializableExtra("KeyLoginResponse");
+
         NetModule netModule = new NetModule();
-        netModule.getNetService().workerList().subscribeOn(Schedulers.io())
+
+        String header = "bearer " +  loginResponse.getToken();
+        netModule.getNetService().workerList(header).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(this::finishLoading)
                 .doOnSuccess(this::handleResponse)

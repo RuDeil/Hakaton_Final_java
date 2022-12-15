@@ -11,33 +11,25 @@ import android.widget.CompoundButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hakatonfinaljava.R;
+import com.example.hakatonfinaljava.boss.BossActivity;
+import com.example.hakatonfinaljava.client.ClientActivity;
 import com.example.hakatonfinaljava.models.LoginData;
 import com.example.hakatonfinaljava.net.NetModule;
 import com.example.hakatonfinaljava.registration.RegistrationActivity;
-import com.example.hakatonfinaljava.boss.BossActivity;
-import com.example.hakatonfinaljava.client.ClientActivity;
 import com.example.hakatonfinaljava.responses.LoginResponse;
-import com.example.hakatonfinaljava.responses.MAC;
 import com.example.hakatonfinaljava.utils.Utils;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Response;
-import retrofit2.http.Body;
 
 public class MainActivity extends AppCompatActivity {
-
-
 
 
     TextInputLayout textInputLayoutPhone, textInputLayoutPass, textInputLayoutGuest;
@@ -47,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRegister;
     private Boolean isBoss = true;
     private Integer userType = 0; //  (0 - гость, 1 - сотрудник, 2 - начальник)
-
 
 
     private String error;
@@ -164,27 +155,29 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
-                case R.id.btnReg:{
+                break;
+                case R.id.btnReg: {
                     intent = new Intent(MainActivity.this, RegistrationActivity.class);
                     startActivity(intent);
                 }
+                break;
             }
         }
     }
+
     private void handleResponse(Response<LoginResponse> result) {
         try {
-
-
-
-
+            LoginResponse response = Utils.handleResults(result);
+            openAuthScreen(response);
         } catch (Throwable e) {
             Utils.handleError(e, this);
             textInputLayoutPhone.setErrorEnabled(true);
-
-
         }
     }
+
     private void finishLoading() {
+
+
 
 
     }
@@ -193,34 +186,31 @@ public class MainActivity extends AppCompatActivity {
         switch (loginResponse.getUser()) {
             //Если юзер гость - переходит на экран обычного юзера - без возможности разлогинится, не убив приложение.
             case 0:
-              Intent intent = new Intent(MainActivity.this, ClientActivity.class);
+                Intent intent = new Intent(MainActivity.this, ClientActivity.class);
                 intent.putExtra("KeyLoginResponse", (Serializable) loginResponse);
                 startActivity(intent);
-
                 break;
+
             //Если юзер Сотрудник - переходит на экран обычного юзера
             case 1:
                 intent = new Intent(MainActivity.this, ClientActivity.class);
+                intent.putExtra("KeyLoginResponse", (Serializable) loginResponse);
                 startActivity(intent);
+                finish();
                 break;
-
 
             //Если юзер начальник переходит на активити начальника
             case 2:
                 intent = new Intent(MainActivity.this, BossActivity.class);
+                intent.putExtra("KeyLoginResponse", (Serializable) loginResponse);
                 startActivity(intent);
                 break;
             default:
                 textInputLayoutPhone.setErrorEnabled(true);
-
-
                 break;
 
         }
     }
-
-
-
 
 
     private void startLoading() {

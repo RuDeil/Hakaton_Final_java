@@ -43,7 +43,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation('com.squareup.okhttp3:okhttp:5.0.0-alpha.10')
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.1')
 // to run JUnit 3/4 tests:
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

@@ -1,6 +1,8 @@
 package com.example.hakatonfinaljava.responses;
 
-public class MAC {
+import java.io.Serializable;
+
+public class MAC implements Serializable {
     private String mac;
 
     public String getMAC() {

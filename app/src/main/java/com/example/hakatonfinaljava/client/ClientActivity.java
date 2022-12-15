@@ -1,10 +1,6 @@
 package com.example.hakatonfinaljava.client;
 
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -12,47 +8,129 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+
 import com.example.hakatonfinaljava.R;
+import com.example.hakatonfinaljava.models.OnlineData;
+import com.example.hakatonfinaljava.net.NetModule;
+import com.example.hakatonfinaljava.responses.BaseResponse;
+import com.example.hakatonfinaljava.responses.LoginResponse;
+import com.example.hakatonfinaljava.responses.MAC;
+import com.example.hakatonfinaljava.utils.Utils;
 
 import java.util.ArrayList;
 
-import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class ClientActivity extends AppCompatActivity {
-    private String macAddrUser;
-
-
-    ArrayList<String> MacArray;
+    ArrayList<MAC> MacArray = new ArrayList<MAC>();
     TextView tvUserName;
+    AppCompatButton btnExit, btnUpdate;
+    private LoginResponse loginResponse = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-        initToolbar();
         checkPermission();
+
         tvUserName = findViewById(R.id.TvUser);
-        macAddrUser = getMacAddrUser();
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnExit = findViewById(R.id.btnExit);
+
+        loginResponse = (LoginResponse) getIntent().getSerializableExtra("KeyLoginResponse");
+        initView(loginResponse.getUsername(), loginResponse.getUser());
+        initToolbar();
+        MacArray = loginResponse.getMacs();
+
+
+        btnUpdate.setOnClickListener(view -> setOnlineRequest(loginResponse.getUserID(), loginResponse.getToken()));
+        btnExit.setOnClickListener(view -> setLogoutRequest(loginResponse.getToken()));
 
         int resultChekMac = 0;
-        resultChekMac = CheckMac(MacArray, getMacAddrUser());
-        if (resultChekMac!=0){
-            
-        }
 
+        //resultChekMac = checkMac(MacArray);
+//        if (resultChekMac != 0) {
+//
+//        }
+            // todo вынести с main thread
 
     }
 
+    private void setLogoutRequest(String token) {
+        String header = "bearer "+ token;
+        NetModule netModule = new NetModule();
+        netModule.getNetService().logout(header)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(this::closeApp)
+                .subscribe();
+    }
+
+    private void closeApp() {
+        finishAndRemoveTask();
+    }
+
+    private void setOnlineRequest(String userID, String token) {
+        OnlineData onlineData = new OnlineData(getMacAddrUser(), userID);
+        NetModule netModule = new NetModule();
+        String header = "bearer "+ token;
+        netModule.getNetService().online(header, onlineData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(this::handleResponse)
+                .doOnError(this::handleError)
+                .subscribe();
+    }
+
+    private void handleError(Throwable error) {
+        Log.e("TAG", "handleError: " + error.getMessage());
+        Utils.handleError(error, this);
+    }
+
+    private void handleResponse(Response<BaseResponse> baseResponseResponse) {
+        try {
+            BaseResponse response = Utils.handleResults(baseResponseResponse);
+            if (response.getResult() == 4) {
+                // todo show error if result is bad
+            } else {
+                // todo all is ok
+            }
+        } catch (Throwable e) {
+            handleError(e);
+        }
+    }
+
+    private void initView(String username, Integer user) {
+        tvUserName.setText(username);
+        switch (user){
+            case 0: {
+                btnExit.setVisibility(View.GONE);
+            }
+                break;
+            case 1: {
+                btnExit.setVisibility(View.VISIBLE);
+            }
+            break;
+        }
+    }
 
 
     public void checkPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
 
 
             } else {
@@ -65,7 +143,7 @@ public class ClientActivity extends AppCompatActivity {
 
 
 
-    public int CheckMac(ArrayList<String> MacArray, String macAddrUser){
+    public int CheckMac(ArrayList<String> MacArray){ // todo вынести с mainthread
         int alarm = 0;
         for(int i =0;MacArray.size()>i;i++){
             if (getMacAddrUser() == MacArray.get(i)){
@@ -73,15 +151,13 @@ public class ClientActivity extends AppCompatActivity {
             }
         }
         return alarm;
-
     }
+
     public String getMacAddrUser() {
-        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(
-                Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInf = wifiManager.getConnectionInfo();
         return wifiInf.getBSSID().toString();
     }
-
 
 
     @Override
@@ -97,12 +173,6 @@ public class ClientActivity extends AppCompatActivity {
 
 
     private void initToolbar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
-
         setTitle("");
     }
 
@@ -112,6 +182,11 @@ public class ClientActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do nothing
     }
 }
 
