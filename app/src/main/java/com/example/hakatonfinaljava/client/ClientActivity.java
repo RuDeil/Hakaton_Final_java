@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 
 import com.example.hakatonfinaljava.R;
+import com.example.hakatonfinaljava.models.ClientData;
 import com.example.hakatonfinaljava.models.OnlineData;
 import com.example.hakatonfinaljava.net.NetModule;
 import com.example.hakatonfinaljava.responses.BaseResponse;
@@ -59,6 +60,7 @@ public class ClientActivity extends AppCompatActivity {
         btnExit = findViewById(R.id.btnExit);
 
         loginResponse = (LoginResponse) getIntent().getSerializableExtra("KeyLoginResponse");
+        String USER_ID = loginResponse.getUserID();
         initView(loginResponse.getUsername(), loginResponse.getUser());
         initToolbar();
         MacArray = loginResponse.getMacs();
@@ -71,7 +73,7 @@ public class ClientActivity extends AppCompatActivity {
 
 
 
-        Observable.just(true).repeatWhen(t->t.delay(10,TimeUnit.SECONDS)).subscribe(b->{setOnlineRequest(loginResponse.getUserID(), loginResponse.getToken());});
+        Observable.just(true).repeatWhen(t->t.delay(10,TimeUnit.SECONDS)).subscribe(b->{setOnlineRequest(USER_ID , loginResponse.getToken());});
 
 
 
