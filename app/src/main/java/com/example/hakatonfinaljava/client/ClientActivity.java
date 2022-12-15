@@ -2,6 +2,7 @@ package com.example.hakatonfinaljava.client;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
@@ -27,7 +28,11 @@ import com.example.hakatonfinaljava.responses.MAC;
 import com.example.hakatonfinaljava.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
@@ -40,6 +45,7 @@ public class ClientActivity extends AppCompatActivity {
     private LoginResponse loginResponse = null;
 
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,17 +63,22 @@ public class ClientActivity extends AppCompatActivity {
 
 
         btnUpdate.setOnClickListener(view -> setOnlineRequest(loginResponse.getUserID(), loginResponse.getToken()));
+
         btnExit.setOnClickListener(view -> setLogoutRequest(loginResponse.getToken()));
 
-        int resultChekMac = 0;
 
-        //resultChekMac = checkMac(MacArray);
-//        if (resultChekMac != 0) {
-//
-//        }
-            // todo вынести с main thread
+
+        Observable.just(true).repeatWhen(t->t.delay(10,TimeUnit.SECONDS)).subscribe(b->{setOnlineRequest(loginResponse.getUserID(), loginResponse.getToken());});
+
+
 
     }
+
+
+
+
+
+
 
     private void setLogoutRequest(String token) {
         String header = "bearer "+ token;
@@ -143,15 +154,7 @@ public class ClientActivity extends AppCompatActivity {
 
 
 
-    public int CheckMac(ArrayList<String> MacArray){ // todo вынести с mainthread
-        int alarm = 0;
-        for(int i =0;MacArray.size()>i;i++){
-            if (getMacAddrUser() == MacArray.get(i)){
-                alarm++;
-            }
-        }
-        return alarm;
-    }
+
 
     public String getMacAddrUser() {
         WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
