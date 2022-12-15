@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
 
-                if (s.length() != 12) {
+                if (s.length() != 11) {
                     textInputLayoutPhone.setErrorEnabled(true);
                     error = "Некорректный номер телефона";
                     textInputLayoutPhone.setError(error);

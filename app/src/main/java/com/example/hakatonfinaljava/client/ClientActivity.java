@@ -2,7 +2,6 @@ package com.example.hakatonfinaljava.client;
 
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
@@ -27,16 +26,19 @@ import com.example.hakatonfinaljava.responses.LoginResponse;
 import com.example.hakatonfinaljava.responses.MAC;
 import com.example.hakatonfinaljava.utils.Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientActivity extends AppCompatActivity {
     ArrayList<MAC> MacArray = new ArrayList<MAC>();
@@ -45,7 +47,7 @@ public class ClientActivity extends AppCompatActivity {
     private LoginResponse loginResponse = null;
 
 
-    @SuppressLint("CheckResult")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class ClientActivity extends AppCompatActivity {
         initView(loginResponse.getUsername(), loginResponse.getUser());
         initToolbar();
         MacArray = loginResponse.getMacs();
+
 
 
         btnUpdate.setOnClickListener(view -> setOnlineRequest(loginResponse.getUserID(), loginResponse.getToken()));
@@ -95,15 +98,17 @@ public class ClientActivity extends AppCompatActivity {
     }
 
     private void setOnlineRequest(String userID, String token) {
-        OnlineData onlineData = new OnlineData(getMacAddrUser(), userID);
+        OnlineData onlineData = new OnlineData(userID, getMacAddrUser());
         NetModule netModule = new NetModule();
-        String header = "bearer "+ token;
+        String header = token;
         netModule.getNetService().online(header, onlineData)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::handleResponse)
                 .doOnError(this::handleError)
                 .subscribe();
+
+
     }
 
     private void handleError(Throwable error) {

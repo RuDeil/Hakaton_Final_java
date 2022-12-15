@@ -1,5 +1,6 @@
 package com.example.hakatonfinaljava.models;
 
+
 public class OnlineData {
     private String mac;
     private String user_id;

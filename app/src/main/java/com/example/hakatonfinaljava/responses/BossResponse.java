@@ -21,29 +21,3 @@ public class BossResponse extends BaseResponse implements Serializable {
 
 
 }
-/*200 OK
- {
-    "username": "Ўакал Ўакальевич Ўакальский",
-    "status": "online",
-    "phone": "79782314343",
-    "user": 1,
-    "user_id": "123",
-    "date": "13-12-2022 17:23",
-},
-{
-    "username": " альмар Ўухеевич ∆ивомЄртво",
-    "status": "offline",
-    "phone": "79782384023",
-    "user": 2,
-    "user_id": "123",
-    "date": "13-12-2022 17:23"
-},
-{
-    "username": " альмар Ўухеевич ∆ивомЄртво",
-    "status": "alert",
-    "user": 0,
-    "user_id": "123",
-    "date": "13-12-2022 17:23"
-}
-
- */
